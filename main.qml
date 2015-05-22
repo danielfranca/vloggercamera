@@ -7,7 +7,7 @@ import SharedComponents 1.0
 ApplicationWindow {
     id: main
     title: qsTr("Vlogger Camera")
-    width: 640
+    width: 900
     height: 480
     visible: true
 
@@ -18,8 +18,8 @@ ApplicationWindow {
         movable: false
 
         panels: [
-                    { id: "notes", container: mainContainer, qml: "qrc:/Notes.qml", innerObject: null, name: "notes", percentWidth: 30, percentHeight: 30, object: null },
-                    { id: "camera", container: mainContainer, qml: "qrc:/Camera.qml", innerObject: null, name: "camera", percentWidth: 70, percentHeight: 70, object: null }
+                    { id: "notes", container: mainContainer, qml: "qrc:/Notes.qml", innerObject: null, name: "notes", percentWidth: 20, percentHeight: 30, object: null },
+                    { id: "camera", container: mainContainer, qml: "qrc:/Camera.qml", innerObject: null, name: "camera", percentWidth: 80, percentHeight: 70, object: null }
         ]
 
     }
