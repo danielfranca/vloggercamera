@@ -7,9 +7,10 @@ import SharedComponents 1.0
 ApplicationWindow {
     id: main
     title: qsTr("Vlogger Camera")
-    width: 900
-    height: 480
+    width: 1136
+    height: 640
     visible: true
+    property string mainColor: "#454545"
 
     PanelContainer {
         id: mainContainer
@@ -18,8 +19,8 @@ ApplicationWindow {
         movable: false
 
         panels: [
-                    { id: "notes", container: mainContainer, qml: "qrc:/PanelNotes.qml", innerObject: null, name: "notes", percentWidth: 20, percentHeight: 30, object: null },
-                    { id: "camera", container: mainContainer, qml: "qrc:/PanelCamera.qml", innerObject: null, name: "camera", percentWidth: 80, percentHeight: 70, object: null }
+            { id: "notes", container: mainContainer, qml: "qrc:/PanelNotes.qml", innerObject: null, name: "notes", percentWidth: 20, percentHeight: 30, object: null, color: mainColor },
+            { id: "camera", container: mainContainer, qml: "qrc:/PanelCamera.qml", innerObject: null, name: "camera", percentWidth: 80, percentHeight: 70, object: null, color: mainColor }
         ]
 
     }
