@@ -4,5 +4,8 @@
         <file>MainForm.ui.qml</file>
         <file>PanelNotes.qml</file>
         <file>PanelCamera.qml</file>
+        <file>img/decrease-font-24.png</file>
+        <file>img/increase-font-24.png</file>
+        <file>ColorButton.qml</file>
     </qresource>
 </RCC>
