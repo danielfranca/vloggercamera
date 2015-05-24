@@ -18,8 +18,8 @@ ApplicationWindow {
         movable: false
 
         panels: [
-                    { id: "notes", container: mainContainer, qml: "qrc:/Notes.qml", innerObject: null, name: "notes", percentWidth: 20, percentHeight: 30, object: null },
-                    { id: "camera", container: mainContainer, qml: "qrc:/Camera.qml", innerObject: null, name: "camera", percentWidth: 80, percentHeight: 70, object: null }
+                    { id: "notes", container: mainContainer, qml: "qrc:/PanelNotes.qml", innerObject: null, name: "notes", percentWidth: 20, percentHeight: 30, object: null },
+                    { id: "camera", container: mainContainer, qml: "qrc:/PanelCamera.qml", innerObject: null, name: "camera", percentWidth: 80, percentHeight: 70, object: null }
         ]
 
     }

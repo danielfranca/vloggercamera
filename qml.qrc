@@ -2,7 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>MainForm.ui.qml</file>
-        <file>Notes.qml</file>
-        <file>Camera.qml</file>
+        <file>PanelNotes.qml</file>
+        <file>PanelCamera.qml</file>
     </qresource>
 </RCC>
