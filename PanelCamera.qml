@@ -41,9 +41,30 @@ Rectangle {
             width: 40
             height: 40
             color: "red"
-            //visible: camera.videoRecorder.recorderStatus == CameraRecorder.LoadedStatus
 
             anchors.centerIn: parent
+
+            states: [
+                State {
+                    name: "stopped"; when: camera.videoRecorder.recorderState === CameraRecorder.StoppedState
+                    PropertyChanges {
+                        target: recordButton; radius: 50;
+                    }
+                },
+                State {
+                    name: "recording"; when: camera.videoRecorder.recorderState === CameraRecorder.RecordingState
+                    PropertyChanges {
+                        target: recordButton; radius: 0;
+                    }
+                }
+            ]
+
+            transitions: Transition {
+                NumberAnimation {
+                    properties: "radius"; easing.type: Easing.Linear
+                    duration: 300
+                }
+            }
 
             MouseArea {
                 anchors.fill: parent
