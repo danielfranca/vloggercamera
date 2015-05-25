@@ -72,13 +72,55 @@ Rectangle {
                 colorSelect: "yellow"
                 onClicked: notes.color = "yellow"
             }
+
+            Image {
+                id: arrow
+                source: "qrc:/img/arrow-down-16.png"
+                state: "close"
+                rotation: 0
+
+                states: [
+                    State {
+                        name: "open"
+                        PropertyChanges {
+                            target: arrow
+                            rotation: 180
+                        }
+                        PropertyChanges {
+                            target: background
+                            visible: true
+                        }
+                    },
+                    State {
+                        name: "close"
+                        PropertyChanges {
+                            target: arrow
+                            rotation: 0
+                        }
+                        PropertyChanges {
+                            target: background
+                            visible: false
+                        }
+                    }
+                ]
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if (arrow.state === "close")
+                            arrow.state = "open";
+                        else
+                            arrow.state = "close";
+                    }
+                }
+            }
         }
     }
 
     Rectangle {
         id: background
         color: "white"
-        opacity: 0.5
+        opacity: 0.6
         height: parent.height - topMenu.height
         width: parent.width - 2
         x: 2

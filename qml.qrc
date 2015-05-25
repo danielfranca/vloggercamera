@@ -7,5 +7,6 @@
         <file>img/decrease-font-24.png</file>
         <file>img/increase-font-24.png</file>
         <file>ColorButton.qml</file>
+        <file>img/arrow-down-16.png</file>
     </qresource>
 </RCC>
