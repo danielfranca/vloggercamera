@@ -9,7 +9,7 @@ Rectangle {
     PanelNotes {
         id: panelNotes
         z: 100
-        width: video.width / 4
+        originalWidth: video.width / 4
         height: video.height - 30
     }
 
@@ -22,6 +22,7 @@ Rectangle {
         videoRecorder.videoCodec: "h264"
         videoRecorder.frameRate: 24
         videoRecorder.resolution: Qt.size(1920, 1080)
+        //position: Camera.FrontFace
         //videoRecorder.outputLocation: "/Users/dfranca"
     }
 
