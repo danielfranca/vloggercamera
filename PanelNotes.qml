@@ -104,6 +104,13 @@ Rectangle {
                     }
                 ]
 
+                transitions: Transition {
+                    NumberAnimation {
+                        properties: "rotation"; easing.type: Easing.Linear
+                        duration: 300
+                    }
+                }
+
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
@@ -135,7 +142,7 @@ Rectangle {
             antialiasing: true
 
             font.family: "Arial"
-            font.pixelSize: 14
+            font.pixelSize: 18
             color: "black"
 
         }
