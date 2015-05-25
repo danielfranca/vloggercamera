@@ -27,7 +27,7 @@ Rectangle {
 
     VideoOutput {
         id: video
-        width: parent.width - 60
+        width: parent.width
         height: parent.height
 
         source: camera
@@ -35,11 +35,12 @@ Rectangle {
 
     Rectangle {
         id: controls
-        anchors.left: video.right
+        anchors.right: video.right
         anchors.top: parent.top
         width: 60
         height: parent.height
-
+        z: 100
+        opacity: 0.5
         color: "#DEDEDE"
 
         Rectangle {
@@ -67,12 +68,20 @@ Rectangle {
                         PropertyChanges {
                             target: recordButton; radius: 50;
                         }
+                        /*PropertyChanges {
+                            target: controls; opacity: 1;
+                        }*/
+
                     },
                     State {
                         name: "recording"; when: camera.videoRecorder.recorderState === CameraRecorder.RecordingState
                         PropertyChanges {
                             target: recordButton; radius: 0;
                         }
+                        /*PropertyChanges {
+                            target: controls; opacity: 0.2;
+                        }*/
+
                     }
                 ]
 

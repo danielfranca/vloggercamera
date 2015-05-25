@@ -12,13 +12,14 @@ Rectangle {
         id: topMenu
         color: "white"
         x: 0
-        y: 2
+        y: 0
         width: parent.width
         height: 30
 
         RowLayout {
             id: menuLayout
             x: 5
+            y: 2
             spacing: 5
 
             Image {
@@ -73,55 +74,61 @@ Rectangle {
                 onClicked: notes.color = "yellow"
             }
 
-            Image {
-                id: arrow
-                source: "qrc:/img/arrow-down-16.png"
-                state: "close"
-                rotation: 0
+        }
 
-                states: [
-                    State {
-                        name: "open"
-                        PropertyChanges {
-                            target: arrow
-                            rotation: 180
-                        }
-                        PropertyChanges {
-                            target: background
-                            visible: true
-                        }
-                    },
-                    State {
-                        name: "close"
-                        PropertyChanges {
-                            target: arrow
-                            rotation: 0
-                        }
-                        PropertyChanges {
-                            target: background
-                            visible: false
-                        }
+        Image {
+            id: arrow
+            source: "qrc:/img/arrow-down-16.png"
+            state: "close"
+            anchors.right: topMenu.right
+            anchors.rightMargin: 7
+            anchors.verticalCenter: topMenu.verticalCenter
+            rotation: 0
+
+            states: [
+                State {
+                    name: "open"
+                    PropertyChanges {
+                        target: arrow
+                        rotation: 180
                     }
-                ]
-
-                transitions: Transition {
-                    NumberAnimation {
-                        properties: "rotation"; easing.type: Easing.Linear
-                        duration: 300
+                    PropertyChanges {
+                        target: background
+                        visible: true
+                    }
+                },
+                State {
+                    name: "close"
+                    PropertyChanges {
+                        target: arrow
+                        rotation: 0
+                    }
+                    PropertyChanges {
+                        target: background
+                        visible: false
                     }
                 }
+            ]
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (arrow.state === "close")
-                            arrow.state = "open";
-                        else
-                            arrow.state = "close";
-                    }
+            transitions: Transition {
+                NumberAnimation {
+                    properties: "rotation"; easing.type: Easing.Linear
+                    duration: 300
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if (arrow.state === "close")
+                        arrow.state = "open";
+                    else
+                        arrow.state = "close";
                 }
             }
         }
+
+
     }
 
     Rectangle {
@@ -141,7 +148,7 @@ Rectangle {
             wrapMode: TextInput.WordWrap
             antialiasing: true
 
-            font.family: "Arial"
+            font.family: "Georgia"
             font.pixelSize: 18
             color: "black"
 
