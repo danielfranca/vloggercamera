@@ -6,6 +6,7 @@ import QtQuick.Layouts 1.1
 Rectangle {
     height: parent.height
     width: parent.width
+    color: "transparent"
 
     Rectangle {
         id: topMenu
@@ -44,49 +45,58 @@ Rectangle {
 
             ColorButton {
                 colorSelect: "black"
-                onClicked: notes.textColor = "black"
+                onClicked: notes.color = "black"
             }
 
             ColorButton {
                 colorSelect: "grey"
-                onClicked: notes.textColor = "grey"
+                onClicked: notes.color = "grey"
             }
 
             ColorButton {
                 colorSelect: "red"
-                onClicked: notes.textColor = "red"
+                onClicked: notes.color = "red"
             }
 
             ColorButton {
                 colorSelect: "blue"
-                onClicked: notes.textColor = "blue"
+                onClicked: notes.color = "blue"
             }
 
             ColorButton {
                 colorSelect: "green"
-                onClicked: notes.textColor = "green"
+                onClicked: notes.color = "green"
+            }
+
+            ColorButton {
+                colorSelect: "yellow"
+                onClicked: notes.color = "yellow"
             }
         }
     }
 
-    TextArea {
-        id: notes
+    Rectangle {
+        id: background
+        color: "white"
+        opacity: 0.5
+        height: parent.height - topMenu.height
+        width: parent.width - 2
         x: 2
         anchors.top: topMenu.bottom
         anchors.topMargin: 2
-        height: parent.height - topMenu.height - 5
-        width: parent.width - 5
-        wrapMode: TextInput.WordWrap
-        antialiasing: true
 
-        font.family: "Courier"
-        font.pixelSize: 14
-        textColor: "black"
+        TextEdit {
+            id: notes
+            height: parent.height
+            width: parent.width
+            wrapMode: TextInput.WordWrap
+            antialiasing: true
 
-        style: TextAreaStyle {
-            renderType: Text.NativeRendering
+            font.family: "Arial"
+            font.pixelSize: 14
+            color: "black"
+
         }
-
     }
 }
 

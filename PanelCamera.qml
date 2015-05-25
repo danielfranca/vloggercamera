@@ -6,6 +6,13 @@ Rectangle {
     width: parent.width
     height: parent.height
 
+    PanelNotes {
+        id: panelNotes
+        z: 100
+        width: video.width / 4
+        height: video.height - 30
+    }
+
     Camera {
         id: camera
         captureMode: Camera.CaptureVideo
