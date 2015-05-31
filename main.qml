@@ -2,7 +2,7 @@ import QtQuick 2.4
 import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
-import SharedComponents 1.0
+//import SharedComponents 1.0
 
 ApplicationWindow {
     id: main
@@ -11,6 +11,9 @@ ApplicationWindow {
     height: 640
     visible: true
     property string mainColor: "#454545"
+
+    //1080
+    //1917
 
     PanelContainer {
         id: mainContainer

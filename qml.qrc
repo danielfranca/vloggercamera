@@ -8,5 +8,10 @@
         <file>img/increase-font-24.png</file>
         <file>ColorButton.qml</file>
         <file>img/arrow-down-16.png</file>
+        <file>HighlightEdge.qml</file>
+        <file>Panel.qml</file>
+        <file>PanelContainer.qml</file>
+        <file>img/switch-camera-24.png</file>
+        <file>img/switch-camera-48.png</file>
     </qresource>
 </RCC>

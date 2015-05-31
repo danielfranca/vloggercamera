@@ -3,20 +3,24 @@ import QtQuick.Controls 1.3
 import QtQuick.Controls.Styles 1.2
 import QtQuick.Layouts 1.1
 import Qt.labs.settings 1.0
+import QtQuick.Window 2.2
 
 Rectangle {
     height: parent.height
     width: parent.width
     color: "transparent"
     property int originalWidth
+    property int originalHeight
+    property int finalWidth: originalWidth
+    property int finalHeight: originalHeight
 
     Rectangle {
         id: topMenu
         color: "white"
         x: 0
         y: 0
-        width: originalWidth
-        height: 30
+        width: finalWidth
+        height: 40
         state: "close"
 
         states: [
@@ -37,8 +41,10 @@ Rectangle {
             },
             State {
                name: "open"
-               PropertyChanges { target: topMenu; width: originalWidth }
-               PropertyChanges { target: background; width: originalWidth - 2 }
+               PropertyChanges { target: topMenu; width: finalWidth }
+               PropertyChanges { target: background; width: finalWidth - 2 }
+               PropertyChanges { target: background; height: finalHeight - 3 }
+
                PropertyChanges { target: fontDecrease; visible: true }
                PropertyChanges { target: fontIncrease; visible: true }
                PropertyChanges { target: buttonBlack; visible: true }
@@ -64,14 +70,14 @@ Rectangle {
         RowLayout {
             id: menuLayout
             x: 5
-            y: 2
-            spacing: 5
+            y: 3
+            spacing: 8
 
             Rectangle {
                 id: menuIcon
                 color: "transparent"
-                height: 20
-                width: 20
+                height: 38
+                width: 38
 
                 ColumnLayout {
                     spacing: 4
@@ -79,19 +85,31 @@ Rectangle {
                         model: 3
                         Rectangle {
                             color: "#509ddd"
-                            width: 20
-                            height: 4
-                            radius: 2
+                            width: menuIcon.width
+                            height: menuIcon.height / 5
+                            radius: 3
                         }
                     }
 
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            if (topMenu.state === "open")
+                            if (topMenu.state === "open") {
                                 topMenu.state = "close";
-                            else
+                            }
+                            else {
+                                if (Screen.primaryOrientation === Qt.LandscapeOrientation) {
+
+                                    finalWidth = originalWidth / 3 * 2;
+                                    console.log("Landscape orientation - final width: " + finalWidth);
+                                }
+                                else {
+                                    finalWidth = originalWidth;
+                                    finalHeight = originalHeight;
+                                    console.log("Portrait orientation - final width: " + finalWidth);
+                                }
                                 topMenu.state = "open";
+                            }
                         }
                     }
                 }
@@ -105,7 +123,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
 
-                    onClicked: notes.font.pointSize--;
+                    onClicked: notes.font.pointSize -= 2;
                 }
             }
 
@@ -116,7 +134,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
 
-                    onClicked: notes.font.pointSize++;
+                    onClicked: notes.font.pointSize += 2;
                 }
             }
 
@@ -157,58 +175,6 @@ Rectangle {
             }
 
         }
-
-        /*Image {
-            id: arrow
-            source: "qrc:/img/arrow-down-16.png"
-            state: "close"
-            anchors.right: topMenu.right
-            anchors.rightMargin: 7
-            anchors.verticalCenter: topMenu.verticalCenter
-            rotation: 0
-
-            states: [
-                State {
-                    name: "open"
-                    PropertyChanges {
-                        target: arrow
-                        rotation: 180
-                    }
-                    PropertyChanges {
-                        target: background
-                        visible: true
-                    }
-                },
-                State {
-                    name: "close"
-                    PropertyChanges {
-                        target: arrow
-                        rotation: 0
-                    }
-                    PropertyChanges {
-                        target: background
-                        visible: false
-                    }
-                }
-            ]
-
-            transitions: Transition {
-                NumberAnimation {
-                    properties: "rotation"; easing.type: Easing.Linear
-                    duration: 300
-                }
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    if (arrow.state === "close")
-                        arrow.state = "open";
-                    else
-                        arrow.state = "close";
-                }
-            }
-        }*/
     }
 
     Rectangle {

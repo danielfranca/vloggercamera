@@ -1,36 +1,44 @@
 import QtQuick 2.0
-import QtMultimedia 5.0
-import QtGraphicalEffects 1.0
+import QtMultimedia 5.4
+import QtQuick.Layouts 1.1
+import QtQuick.Window 2.2
 
 Rectangle {
     width: parent.width
     height: parent.height
+    id: rootCamera
 
     PanelNotes {
         id: panelNotes
         z: 100
-        originalWidth: video.width / 4
+        originalWidth: video.width
+        originalHeight: video.height
         height: video.height - 30
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: rootCamera.forceActiveFocus();
     }
 
     Camera {
         id: camera
-        captureMode: Camera.CaptureVideo
+        //captureMode: Camera.CaptureVideo
         videoRecorder.audioEncodingMode: CameraRecorder.ConstantBitRateEncoding
         videoRecorder.audioBitRate: 128000
         videoRecorder.mediaContainer: "mp4"
         videoRecorder.videoCodec: "h264"
         videoRecorder.frameRate: 24
         videoRecorder.resolution: Qt.size(1920, 1080)
-        //position: Camera.FrontFace
-        //videoRecorder.outputLocation: "/Users/dfranca"
+        position: Camera.FrontFace
     }
 
     VideoOutput {
         id: video
-        width: parent.width
-        height: parent.height
-
+        //width: parent.width
+        //height: parent.height
+        anchors.fill: parent
+        autoOrientation: true
         source: camera
     }
 
@@ -43,6 +51,25 @@ Rectangle {
         z: 100
         opacity: 0.5
         color: "#DEDEDE"
+
+        Image {
+            id: switchCameraButton
+            source: "qrc:/img/switch-camera-48.png"
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.rightMargin: 5
+            anchors.topMargin: 10
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if ( camera.position === Camera.FrontFace )
+                        camera.position = Camera.BackFace;
+                    else
+                        camera.position = Camera.FrontFace;
+                }
+            }
+        }
 
         Rectangle {
             id: parentButton
@@ -69,20 +96,12 @@ Rectangle {
                         PropertyChanges {
                             target: recordButton; radius: 50;
                         }
-                        /*PropertyChanges {
-                            target: controls; opacity: 1;
-                        }*/
-
                     },
                     State {
                         name: "recording"; when: camera.videoRecorder.recorderState === CameraRecorder.RecordingState
                         PropertyChanges {
                             target: recordButton; radius: 0;
                         }
-                        /*PropertyChanges {
-                            target: controls; opacity: 0.2;
-                        }*/
-
                     }
                 ]
 
@@ -100,12 +119,14 @@ Rectangle {
                         if (camera.videoRecorder.recorderState === CameraRecorder.StoppedState)
                         {
                             console.log("Starting record")
+                            camera.captureMode = Camera.CaptureVideo;
                             camera.videoRecorder.record();
                         }
                         else
                         {
                             console.log("Stopping record")
                             camera.videoRecorder.stop();
+                            camera.captureMode = Camera.CaptureViewfinder;
                             console.log("Saved at: " + camera.videoRecorder.actualLocation)
                         }
                     }
