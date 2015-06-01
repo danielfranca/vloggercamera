@@ -4,8 +4,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 
 Rectangle {
-    width: parent.width
-    height: parent.height
+    anchors.fill: parent
     id: rootCamera
 
     PanelNotes {
@@ -35,11 +34,39 @@ Rectangle {
 
     VideoOutput {
         id: video
-        //width: parent.width
-        //height: parent.height
+        //width: 640 // parent.width
+        //height: 1136 //parent.height
         anchors.fill: parent
+
+        function changeOrientation() {
+            var angle;
+            var orientation = Screen.primaryOrientation;
+            console.log("ORIENTATION: " + orientation)
+            if (orientation === Qt.LandscapeOrientation) {
+                console.log("************ LANDSCAPE");
+                angle = 0;
+            } else if (orientation === Qt.PortraitOrientation) {
+                console.log("************ PORTRAIT");
+                angle = 90;
+            } else if (orientation === Qt.InvertedLandscapeOrientation) {
+                console.log("************ INVERTED LANDSCAPE");
+                angle = 180;
+            } else if (orientation === Qt.InvertedPortraitOrientation) {
+                console.log("************ INVERTED PORTRAIT");
+                angle = 270;
+            } else {
+                console.log("************ UNKNOWN");
+                angle = 0;
+            }
+            return angle;
+        }
+
         autoOrientation: true
         source: camera
+        fillMode: VideoOutput.PreserveAspectCrop
+
+        //onWidthChanged: { video.orientation = changeOrientation(); }
+        //onHeightChanged: { video.orientation = changeOrientation(); }
     }
 
     Rectangle {

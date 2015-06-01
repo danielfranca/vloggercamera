@@ -6,8 +6,7 @@ import Qt.labs.settings 1.0
 import QtQuick.Window 2.2
 
 Rectangle {
-    height: parent.height
-    width: parent.width
+    anchors.fill: parent
     color: "transparent"
     property int originalWidth
     property int originalHeight
@@ -17,8 +16,6 @@ Rectangle {
     Rectangle {
         id: topMenu
         color: "white"
-        x: 0
-        y: 0
         width: finalWidth
         height: 40
         state: "close"
@@ -67,7 +64,7 @@ Rectangle {
             }
         ]
 
-        RowLayout {
+        Row {
             id: menuLayout
             x: 5
             y: 3
@@ -98,16 +95,9 @@ Rectangle {
                                 topMenu.state = "close";
                             }
                             else {
-                                if (Screen.primaryOrientation === Qt.LandscapeOrientation) {
+                                //if (Screen.primaryOrientation === Qt.LandscapeOrientation) {
 
-                                    finalWidth = originalWidth / 3 * 2;
-                                    console.log("Landscape orientation - final width: " + finalWidth);
-                                }
-                                else {
-                                    finalWidth = originalWidth;
-                                    finalHeight = originalHeight;
-                                    console.log("Portrait orientation - final width: " + finalWidth);
-                                }
+                                finalWidth = buttonYellow.x + buttonYellow.width + 15;
                                 topMenu.state = "open";
                             }
                         }
